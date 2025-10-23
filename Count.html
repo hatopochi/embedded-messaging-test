@@ -5,79 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MIAW 計測テスト</title>
 
-  <!-- 任意: GA4 等の dataLayer 初期化（未使用なら残しても無害） -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-  </script>
 
-
-
-  <!-- イベント計測用スクリプト：MIAW 準備完了後にリスナー登録 -->
-  <script>
-    // 共通トラッキング関数：dataLayer が無ければ console に出力
-    function track(eventName, params) {
-      try {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push(Object.assign({ event: eventName }, params || {}));
-      } catch (e) {
-        console.log('[MIAW]', eventName, params || {});
-      }
-    }
-
-    // MIAW が準備できたらイベントを購読
-    window.addEventListener('onEmbeddedMessagingReady', function () {
-      // ランチャーボタン生成／押下
-      window.addEventListener('onEmbeddedMessagingButtonCreated', function () {
-        track('miaw_button_created');
-      });
-      window.addEventListener('onEmbeddedMessagingButtonClicked', function () {
-        track('miaw_button_clicked');
-      });
-
-      // プレチャット表示／送信（会話開始直前）
-      window.addEventListener('onEmbeddedMessagingPreChatLoaded', function () {
-        track('miaw_prechat_loaded');
-      });
-      window.addEventListener('onEmbeddedMessagingPreChatSubmitted', function () {
-        track('miaw_prechat_submitted');
-      });
-
-      // 実際の会話開始
-      window.addEventListener('onEmbeddedMessagingConversationStarted', function (e) {
-        track('miaw_conversation_started', { conversationId: e?.conversationId });
-      });
-    });
-  </script>
-
-
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; margin: 2rem; }
-    .hint { color: #666; font-size: 0.9rem; }
-  </style>
 </head>
 <body>
   <h1>MIAW 計測テストC</h1>
   <p class="hint">このページを開いてチャットランチャーを表示・押下し、プレチャットの表示・送信まで進むと、イベントが dataLayer（またはブラウザのコンソール）に送られます。</p>
-  <!-- MIAW 初期化 -->
-<script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			embeddedservice_bootstrap.settings.language = 'ja'; // For example, enter 'en' or 'en-US'
+<!-- ここは本文 … -->
 
-			embeddedservice_bootstrap.init(
-				'00DGC0000057UfZ',
-				'MIAW6',
-				'https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW61754635766656',
-				{
-					scrt2URL: 'https://yukaaraki-240531-774-demo.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
+<!-- 1) MIAW 初期化関数（任意で head でも可） -->
+<script>
+function initEmbeddedMessaging(){
+  try{
+    embeddedservice_bootstrap.settings.language = 'ja';
+    embeddedservice_bootstrap.init(
+      '00DXXXXXXXXXXXX',      // Org Id
+      'MyWebMessaging',       // デプロイメント名
+      'https://<your-exp-site>.my.site.com/<deploymentPath>',
+      { scrt2URL: 'https://<your-domain>.my.salesforce-scrt.com' }
+    );
+  }catch(e){ console.error('MIAW init error', e); }
+}
 </script>
-<script type='text/javascript' src='https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW61754635766656/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+<!-- 2) ブートストラップ本体を読み込み、onload で init 実行（＝ここが </body> 直前） -->
+<script src="https://<your-exp-site>.my.site.com/<deploymentPath>/assets/js/bootstrap.min.js"
+        onload="initEmbeddedMessaging()"></script>
+
+<!-- 3) （任意）Event Listeners は準備完了後に登録 -->
+<script>
+window.addEventListener('onEmbeddedMessagingReady', () => {
+  window.addEventListener('onEmbeddedMessagingButtonCreated', () => console.log('created'));
+  window.addEventListener('onEmbeddedMessagingButtonClicked', () => console.log('clicked'));
+  window.addEventListener('onEmbeddedMessagingPreChatLoaded', () => console.log('prechat loaded'));
+  window.addEventListener('onEmbeddedMessagingPreChatSubmitted', () => console.log('prechat submitted'));
+  window.addEventListener('onEmbeddedMessagingConversationStarted', () => console.log('started'));
+});
+</script>
+</body>
+</html>
+
   <noscript>JavaScript を有効にしてください。</noscript>
 </body>
 </html>
