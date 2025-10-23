@@ -26,6 +26,18 @@ test2
 	};
 </script>
 <script type='text/javascript' src='https://storm-4fc00344b3bd79.my.site.com/ESWX202507081751952920924/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-
+  <!-- 3) Event Listeners（準備完了後に登録） -->
+  <script>
+  window.addEventListener('onEmbeddedMessagingReady', () => {
+    console.log('[MIAW] ready');
+    window.addEventListener('onEmbeddedMessagingButtonCreated',   () => console.log('created'));
+    window.addEventListener('onEmbeddedMessagingButtonClicked',   () => console.log('clicked'));
+    window.addEventListener('onEmbeddedMessagingPreChatLoaded',   () => console.log('prechat loaded'));
+    window.addEventListener('onEmbeddedMessagingPreChatSubmitted',() => console.log('prechat submitted'));
+    window.addEventListener('onEmbeddedMessagingConversationStarted', () => console.log('started'));
+  });
+  window.addEventListener('onEmbeddedMessagingError', e =>
+    console.error('[MIAW error]', e?.detail || e));
+  </script>
 </body>
 </html>
