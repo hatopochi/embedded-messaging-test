@@ -32,42 +32,7 @@
 <script type='text/javascript' src='https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW61754635766656/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
 
-  <!-- イベント計測用スクリプト：MIAW 準備完了後にリスナー登録 -->
-  <script>
-    // 共通トラッキング関数：dataLayer が無ければ console に出力
-    function track(eventName, params) {
-      try {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push(Object.assign({ event: eventName }, params || {}));
-      } catch (e) {
-        console.log('[MIAW]', eventName, params || {});
-      }
-    }
 
-    // MIAW が準備できたらイベントを購読
-    window.addEventListener('onEmbeddedMessagingReady', function () {
-      // ランチャーボタン生成／押下
-      window.addEventListener('onEmbeddedMessagingButtonCreated', function () {
-        track('miaw_button_created');
-      });
-      window.addEventListener('onEmbeddedMessagingButtonClicked', function () {
-        track('miaw_button_clicked');
-      });
-
-      // プレチャット表示／送信（会話開始直前）
-      window.addEventListener('onEmbeddedMessagingPreChatLoaded', function () {
-        track('miaw_prechat_loaded');
-      });
-      window.addEventListener('onEmbeddedMessagingPreChatSubmitted', function () {
-        track('miaw_prechat_submitted');
-      });
-
-      // 実際の会話開始
-      window.addEventListener('onEmbeddedMessagingConversationStarted', function (e) {
-        track('miaw_conversation_started', { conversationId: e?.conversationId });
-      });
-    });
-  </script>
 
   <style>
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; margin: 2rem; }
