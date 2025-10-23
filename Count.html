@@ -11,31 +11,26 @@
   </script>
 
   <!-- MIAW 初期化 -->
-  <script type="text/javascript">
-    function initEmbeddedMessaging() {
-      try {
-        embeddedservice_bootstrap.settings.language = 'ja'; // 例: 'en' や 'en-US' も可
+<script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'ja'; // For example, enter 'en' or 'en-US'
 
-        embeddedservice_bootstrap.init(
-          '00DGC0000057UfZ',
-          'MIAW6',
-          'https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW61754635766656',
-          {
-            scrt2URL: 'https://yukaaraki-240531-774-demo.my.salesforce-scrt.com'
-          }
-        );
-      } catch (err) {
-        console.error('Error loading Embedded Messaging: ', err);
-      }
-    }
-  </script>
+			embeddedservice_bootstrap.init(
+				'00DGC0000057UfZ',
+				'MIAW6',
+				'https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW61754635766656',
+				{
+					scrt2URL: 'https://yukaaraki-240531-774-demo.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW61754635766656/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
-  <!-- MIAW 本体のブートストラップ。読み込み完了で init を実行 -->
-  <script
-    type="text/javascript"
-    src="https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW61754635766656/assets/js/bootstrap.min.js"
-    onload="initEmbeddedMessaging()"
-  ></script>
 
   <!-- イベント計測用スクリプト：MIAW 準備完了後にリスナー登録 -->
   <script>
