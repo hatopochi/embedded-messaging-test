@@ -10,14 +10,14 @@ test3
 <script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
-			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+			embeddedservice_bootstrap.settings.language = 'ja'; // For example, enter 'en' or 'en-US'
 
 			embeddedservice_bootstrap.init(
-				'00DKj000002Wrib',
-				'X20250708',
-				'https://storm-4fc00344b3bd79.my.site.com/ESWX202507081751952920924',
+				'00DGC0000057UfZ',
+				'MIAW4',
+				'https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW41744101159728',
 				{
-					scrt2URL: 'https://storm-4fc00344b3bd79.my.salesforce-scrt.com'
+					scrt2URL: 'https://yukaaraki-240531-774-demo.my.salesforce-scrt.com'
 				}
 			);
 		} catch (err) {
@@ -25,19 +25,7 @@ test3
 		}
 	};
 </script>
-<script type='text/javascript' src='https://storm-4fc00344b3bd79.my.site.com/ESWX202507081751952920924/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-  <!-- 3) Event Listeners（準備完了後に登録） -->
-  <script>
-  window.addEventListener('onEmbeddedMessagingReady', () => {
-    console.log('[MIAW] ready');
-    window.addEventListener('onEmbeddedMessagingButtonCreated',   () => console.log('created'));
-    window.addEventListener('onEmbeddedMessagingButtonClicked',   () => console.log('clicked'));
-    window.addEventListener('onEmbeddedMessagingPreChatLoaded',   () => console.log('prechat loaded'));
-    window.addEventListener('onEmbeddedMessagingPreChatSubmitted',() => console.log('prechat submitted'));
-    window.addEventListener('onEmbeddedMessagingConversationStarted', () => console.log('started'));
-  });
-  window.addEventListener('onEmbeddedMessagingError', e =>
-    console.error('[MIAW error]', e?.detail || e));
-  </script>
+<script type='text/javascript' src='https://yukaaraki-240531-774-demo.my.site.com/ESWMIAW41744101159728/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 </body>
 </html>
